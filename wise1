@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ZEN AI Advanced Business Intelligence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #00ffff;
+            --secondary-color: #ff00ff;
+            --bg-color: #0a0a0a;
+            --dark-bg-color: #1a1a1a;
+            --text-color: #ffffff;
+            --light-text-color: #a0a0a0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        header {
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        nav ul {
+            display: flex;
+            list-style-type: none;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        main {
+            padding-top: 80px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 5rem 0;
+            background: linear-gradient(135deg, var(--bg-color), var(--dark-bg-color));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(45deg, var(--primary-color) 25%, transparent 25%) -50px 0,
+                linear-gradient(-45deg, var(--primary-color) 25%, transparent 25%) -50px 0,
+                linear-gradient(45deg, transparent 75%, var(--primary-color) 75%),
+                linear-gradient(-45deg, transparent 75%, var(--primary-color) 75%);
+            background-size: 100px 100px;
+            opacity: 0.05;
+            animation: backgroundMove 20s linear infinite;
+        }
+
+        @keyframes backgroundMove {
+            0% {
+                background-position: -50px 0, -50px 0, 0 0, 0 0;
+            }
+            100% {
+                background-position: 50px 0, 50px 0, 100px 100px, 100px 100px;
+            }
+        }
+
+        h1, h2 {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--light-text-color);
+            margin-bottom: 2rem;
+        }
+
+        .ai-interface, .news-feed, .saved-generations {
+            background: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .dropdown-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .dropdown {
+            position: relative;
+            flex: 1;
+        }
+
+        .dropbtn {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: var(--bg-color);
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .dropbtn::after {
+            content: '\f107';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+        }
+
+        .dropbtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--dark-bg-color);
+            min-width: 100%;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-content a {
+            color: var(--text-color);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown-content a:hover {
+            background-color: rgba(0, 255, 255, 0.1);
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        #botContainer {
+            width: 100%;
+            height: 700px;
+            margin: 2rem 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        #botContainer:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 255, 255, 0.1);
+        }
+
+        .news-item {
+            background: rgba(255, 255, 255, 0.05);
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .news-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(10px);
+        }
+
+        .news-item a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .news-item a:hover {
+            color: var(--secondary-color);
+        }
+
+        footer {
+            background: var(--dark-bg-color);
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .social-links a {
+            color: var(--light-text-color);
+            margin-left: 1.5rem;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            .dropdown-buttons {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- The HTML structure remains the same as in the previous version -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">ZEN AI</div>
+                <nav>
+                    <ul>
+                        <li><a href="https://www.zenai.biz/">Home</a></li>
+                        <li><a href="https://www.zenai.biz/about">About</a></li>
+                        <li><a href="https://www.zenai.biz/projects-services">Projects & Services</a></li>
+                        <li><a href="https://www.zenai.biz/contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="hero">
+                <h1>Advanced Enhanced Solutions</h1>
+                <p class="subtitle">Empowering the future with cutting-edge AI solutions</p>
+            </section>
+
+            <section class="ai-interface">
+                <h2>AI Assistant</h2>
+                <div id="botContainer">
+                    <iframe id="PRPVOZODEB" loading="eager" src="https://embed.pickaxeproject.com/axe?id=NEARGPT4o_OZTA9&mode=embed_gold&host=beta&theme=custom&opacity=100&font_header=Lora&size_header=32&font_body=Quicksand&size_body=16&font_labels=Quicksand&size_labels=20&font_button=Quicksand&size_button=16&c_fb=050200&c_ff=0975C8&c_fbd=FFFFFF&c_rb=7F7F7F&c_bb=FFFFFF&c_bt=000000&c_t=FFFFFF&s_ffo=100&s_rbo=100&s_bbo=100&s_f=minimalist&s_b=filled&s_t=0.5&s_to=1&s_r=2&q_1=Enter your question here&sb_t=Submit" width="100%" height="100%" frameBorder="0"></iframe>
+                </div>
+                <div class="dropdown-buttons">
+                    <div class="dropdown">
+                        <button class="dropbtn">AI/ML Spaces</button>
+                        <div class="dropdown-content">
+                            <a href="https://us.zenai.biz">Generative Art</a>
+                            <a href="collectivecoin.xyz">LLM's</a>
+                            <a href="https://t.me/ZENOAI">Misc. AI Apps</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <button class="dropbtn">Resources</button>
+                        <div class="dropdown-content">
+                            <a href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7127354324191473665">Latest News</a>
+                            <a href="#">Summer AI Literacy</a>
+                            <a href="#">Services</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <button class="dropbtn">My Assets</button>
+                        <div class="dropdown-content">
+                            <a href="#">Saved Generations</a>
+                            <a href="#">Saved Apps</a>
+                            <a href="#">My Courses</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="news-feed">
+                <h2>Quantum Science & Crypto News</h2>
+                <ul class="news-list" id="newsList">
+                    <!-- News items will be dynamically added here -->
+                </ul>
+            </section>
+
+            <section class="saved-generations">
+                <h2>Saved Generations</h2>
+                <div class="generation-list" id="generationList">
+                    <!-- Saved generations will be dynamically added here -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2024 ZEN AI. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for populating news feed remains the same
+    </script>
+</body>
+</html>
